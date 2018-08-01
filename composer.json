@@ -1,6 +1,6 @@
 {
   "name": "msbios/guard-developer-tools",
-  "description": "MSBios Guard",
+  "description": "MSBios Guard Develop Tools",
   "license": "MIT",
   "keywords": [
     "php"
@@ -22,8 +22,6 @@
     "psr-4": {
       "MSBiosTest\\Guard\\DeveloperTools\\": "tests/"
     }
-  },
-  "require": {
   },
   "require-dev": {
     "msbios/application": "^1.0",
