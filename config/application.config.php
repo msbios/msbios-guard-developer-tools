@@ -8,6 +8,8 @@
 return [
     // Retrieve list of modules used in this application.
     'modules' => [
+        'Zend\Validator',
+        'Zend\Session',
         'MSBios\Guard\Resource',
         'MSBios\Cache',
         'Zend\Cache',

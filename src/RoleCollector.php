@@ -8,6 +8,7 @@ namespace MSBios\Guard\DeveloperTools;
 
 use MSBios\Guard\Provider\IdentityProviderInterface;
 use Zend\Mvc\MvcEvent;
+use Zend\Permissions\Acl\Role\RoleInterface;
 use ZendDeveloperTools\Collector\CollectorInterface;
 
 /**
@@ -66,7 +67,28 @@ class RoleCollector implements CollectorInterface, \Serializable
      */
     public function collect(MvcEvent $mvcEvent)
     {
-        $this->collectedRoles = $this->identityProvider->getIdentityRoles();
+
+        /** @var array $identityRoles */
+        $identityRoles = $this->identityProvider
+            ->getIdentityRoles();
+
+        /**
+         * @var int $key
+         * @var mixed $role
+         */
+        foreach ($identityRoles as $key => $role) {
+            if (is_string($role)) {
+                $this->collectedRoles[$key] = $role;
+                continue;
+            }
+
+            if ($role instanceof RoleInterface) {
+                $this->collectedRoles[$key] = $role->getRoleId();
+                continue;
+            }
+
+            // Exception
+        }
     }
 
     /**
